@@ -13,10 +13,14 @@ steps:
 - script: echo Compilar y correr las pruebas unitarias
 - script:  git clone https://github.com/jesusgit/proyecto-gcs.git
 - script:  cd proyecto-gcs
+- script:  touch /home/vsts/id_azure
+- script:  echo $(id_azure) | tee -a /home/vsts/id_azure
 - script:  sbt compile
 - script:  sbt rpm:packageBin
 - script:  ls -l
-- script:  touch /home/vsts/id_azure
-- script:  echo $(id_azure) |  tee -a /home/vsts/id_azure
+- script:  cd ..
+- script:  ls -l
+- script:  cd ..
+- script:  ls -l
 - script:  sudo scp -i ssh -i /home/vsts/id_azure /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@13.84.202.197:/home/azureuser
   displayName: 'Commit Check'
