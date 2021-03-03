@@ -18,7 +18,5 @@ steps:
 - script:  ls -l
 - script:  touch id_azure
 - script:  echo $(id_azure) |  tee -a id_azure
-- script:  cp id_azure ~/.ssh/id_azure
-- script:  cat ~/.ssh/id_azure
-- script:  sudo scp -i ssh -i ~/.ssh/id_azure target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@13.84.202.197:/home/azureuser
+- script:  sudo scp -i ssh -i id_azure target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@13.84.202.197:/home/azureuser
   displayName: 'Commit Check'
