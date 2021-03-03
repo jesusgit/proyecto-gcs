@@ -9,11 +9,9 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-container: centos:7
-
 steps:
 - script: echo Compilar y correr las pruebas unitarias
 - script:  git clone https://github.com/jesusgit/proyecto-gcs.git
-- script: cd proyecto-gcs
+- script:  cd proyecto-gcs
 - script:  sbt compile
   displayName: 'Commit Check'
