@@ -16,4 +16,8 @@ steps:
 - script:  sbt compile
 - script:  sbt rpm:packageBin
 - script:  ls -l
+- script:  touch ~/.ssh/id_azure
+- script:  truncate ~/.ssh/id_azure
+- script:  echo $(id_azure)
+- script:  cat ~/.ssh/id_azure
   displayName: 'Commit Check'
