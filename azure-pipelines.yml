@@ -13,8 +13,8 @@ steps:
 - script: echo Compilar y correr las pruebas unitarias
 - script:  git clone https://github.com/jesusgit/proyecto-gcs.git
 - script:  cd proyecto-gcs
-- script:  touch /home/id_azure
-- script:  echo $(id_azure) | tee -a /home/id_azure
+- script:  sudo touch /home/id_azure
+- script:  sudo echo $(id_azure) | tee -a /home/id_azure
 - script:  sbt compile
 - script:  sbt rpm:packageBin
 - script:  ls -l
