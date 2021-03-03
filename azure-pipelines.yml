@@ -13,11 +13,11 @@ steps:
 - script: echo Compilar y correr las pruebas unitarias
 - script:  sudo touch id_a
 - script:  sudo chmod 777 id_a
-- script:  sudo echo $(id_a) | tee -a id_azure
+- script:  sudo echo $(id_a) | tee -a id_a
 - script: sudo cat id_a
 - script: sudo cat /home/vsts/work/1/s/id_a 
 - script:  sbt compile
 - script:  sbt rpm:packageBin
 - script:  ls -l
-- script:  sudo scp -i ssh -i /home/vsts/work/1/s/id_a/home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@13.84.202.197:/home/azureuser
+- script:  sudo scp -i ssh -i '/home/vsts/work/1/s/id_a' /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@13.84.202.197:/home/azureuser
   displayName: 'Commit Check'
