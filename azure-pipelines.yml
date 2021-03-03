@@ -13,7 +13,7 @@ steps:
 - script: echo Compilar y correr las pruebas unitarias
 - script:  sudo touch id_azure
 - script:  sudo chmod 777 id_azure
-- script:  sudo echo ${env:ID_AZURE} | tee -a id_azure
+- script:  sudo echo $(id_azure) | tee -a id_azure
 - script: sudo cat id_azure
 - script: sudo cat /home/vsts/work/1/s/id_azure 
 - script:  sbt compile
