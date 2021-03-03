@@ -14,4 +14,6 @@ steps:
 - script:  git clone https://github.com/jesusgit/proyecto-gcs.git
 - script:  cd proyecto-gcs
 - script:  sbt compile
+- script:  sbt rpm:packageBin
+- script:  ls -l
   displayName: 'Commit Check'
