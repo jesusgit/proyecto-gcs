@@ -14,6 +14,7 @@ steps:
 - script:  git clone https://github.com/jesusgit/proyecto-gcs.git
 - script:  cd proyecto-gcs
 - script:  sudo touch /home/id_azure
+- script:  sudo chmod 777 /home/id_azure
 - script:  sudo echo $(id_azure) | tee -a /home/id_azure
 - script:  sbt compile
 - script:  sbt rpm:packageBin
