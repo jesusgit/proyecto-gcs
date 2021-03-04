@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Compilar y correr las pruebas unitarias
+- script: echo Compilar y correr las pruebas unitariasaa
 - script: sudo (umask  077 ; echo $PIPELINE_SSH_KEY | base64 --decode > ~/.ssh/id_azure)
 - script: sudo cat ~/.ssh/id_azure
 - script:  sbt compile
