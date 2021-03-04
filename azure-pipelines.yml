@@ -11,7 +11,7 @@ pool:
 
 steps:
 - script: echo Compilar y correr las pruebas unitariasaa
-- script: sudo (umask  077 ; echo $PIPELINE_SSH_KEY | base64 --decode > ~/.ssh/id_azure)
+- script: sudo (umask  077 ; echo $id_azure | base64 --decode > ~/.ssh/id_azure)
 - script: sudo cat ~/.ssh/id_azure
 - script:  sbt compile
 - script:  sbt rpm:packageBin
