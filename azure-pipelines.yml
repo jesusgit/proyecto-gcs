@@ -13,14 +13,18 @@ steps:
 - script: echo Compilar y correr las pruebas unitariasaa
 - script: sudo mkdir /home/vsts/.ssh
 - script: sudo chown vsts:root /home/vsts/.ssh
+
 - task: JavaToolInstaller@0
   inputs:
     versionSpec: '8'
     jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'LocalDirectory'
-    jdkFile: 'java8'
-    jdkDestinationDirectory: 'java'
-    cleanDestinationDirectory: true
+    jdkSourceOption: AzureStorage
+    azureResourceManagerEndpoint: gss-build-artifacts
+    azureStorageAccountName: gssbuildassets
+    azureContainerName: jdk
+    azureCommonVirtualFile: 'jdk1.8.0.zip'
+    jdkDestinationDirectory: '$(Agent.ToolsDirectory)/jdk8'
+    cleanDestinationDirectory: false
 - script: (umask  077 ; echo $ID_AZURE | base64 --decode --ignore-garbage > /home/vsts/.ssh/id_azure)
 - script: touch /home/vsts/.ssh/known_hosts
 - script: ssh-keyscan -H -t rsa 13.84.202.197  >> /home/vsts/.ssh/known_hosts
