@@ -10,7 +10,9 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: chmod 777 /builds
+- script: mkdir /builds
+          chmod 777 /builds
+
 - task: JavaToolInstaller@0
   inputs:
     versionSpec: '11'
