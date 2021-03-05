@@ -16,16 +16,17 @@ steps:
 - script: sudo echo $ID_AZURE
 - script: (umask  077 ; echo $ID_AZURE | base64 --decode --ignore-garbage > ~/.ssh/id_azure)
 - script: sudo ls -la ~/.ssh
-- script: sudo chmod 400 ~/.ssh/id_azure
+- script: sudo chmod 600 ~/.ssh/id_azure
 - script: sudo cat ~/.ssh/id_azure
 - script: sudo touch ~/.ssh/known_hosts
 - script: sudo  cat ~/.ssh/known_hosts
 - script:  sudo chown vsts:root ~/.ssh
 - script:  sudo chown -R vsts:root ~/.ssh/
-- script: sudo chmod 400 ~/.ssh/id_azure
-- script: sudo chmod 400 ~/.ssh/known_hosts
+- script: sudo chmod 600 ~/.ssh/id_azure
+- script: sudo chmod 600 ~/.ssh/known_hosts
 - script: sudo base64 --version
-- script: sudo ssh -i ~/.ssh/id_azure azureuser@13.84.202.197
+- script: ssh -v azureuser@13.84.202.197
+- script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197
 - script:  sbt compile
 - script:  sbt rpm:packageBin
 - script:  sudo ls -la /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/
