@@ -21,12 +21,12 @@ steps:
 - script: sbt rpm:packageBin
 - script: scp -i ssh -i /home/vsts/.ssh/id_azure /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@13.84.202.197:/home/azureuser
   displayName: 'Commit Checkh'
-- task: PowerShellOnTargetMachines@3
+- task: AzurePowerShell@5
   inputs:
-      Machines: 'serverweb-01'
-      UserName: 'azureuser'
-      InlineScript: |
-        # Write your powershell commands here.
-        
-        Write-Output "Hello World"
-
+      azureSubscription: 'Azure para estudiantes(b75438fa-5691-4b49-a98f-da03e98de004)'
+      ScriptType: 'InlineScript'
+      Inline: |
+        # You can write your azure powershell scripts inline here. 
+        # You can also pass predefined and custom variables to this script using arguments
+        uname -a
+      azurePowerShellVersion: 'LatestVersion'
