@@ -11,7 +11,7 @@ pool:
 
 steps:
 - script: mkdir /builds
-          chmod 777 /builds
+- script: chmod 777 /builds
 
 - task: JavaToolInstaller@0
   inputs:
