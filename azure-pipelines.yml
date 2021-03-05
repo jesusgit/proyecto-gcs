@@ -12,21 +12,10 @@ pool:
 steps:
 - script: echo Compilar y correr las pruebas unitariasaa
 - script: sudo mkdir /home/vsts/.ssh
-- script: sudo chmod 777 /home/vsts/.ssh
-- script: sudo echo $ID_AZURE
-- script: (umask  077 ; echo $ID_AZURE | base64 --decode --ignore-garbage > ~/.ssh/id_azure)
-- script: sudo ls -la /home/vsts/.ssh
-- script: sudo chmod 600 /home/vsts/.ssh/id_azure
-- script: sudo cat /home/vsts/.ssh/id_azure
+- script: (umask  077 ; echo $ID_AZURE | base64 --decode --ignore-garbage > /home/vsts/.ssh/id_azure)
 - script: sudo touch /home/vsts/.ssh/known_hosts
-- script: sudo  cat /home/vsts/.ssh/known_hosts
-- script:  sudo chown vsts:root /home/vsts/.ssh
-- script:  sudo chown -R vsts:root /home/vsts/.ssh/
-- script: sudo chmod 600 /home/vsts/.ssh/id_azure
-- script: sudo chmod 600 /home/vsts/.ssh/known_hosts
 - script: ssh-keyscan -H -t rsa 13.84.202.197  >> /home/vsts/.ssh/known_hosts
 - script:  sbt compile
 - script:  sbt rpm:packageBin
-- script:  sudo ls -la /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/
 - script:  scp -i ssh -i /home/vsts/.ssh/id_azure /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@13.84.202.197:/home/azureuser
   displayName: 'Commit Check'
