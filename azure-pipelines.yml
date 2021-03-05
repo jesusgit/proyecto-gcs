@@ -14,7 +14,7 @@ steps:
 - script: sudo mkdir ~/.ssh
 - script: sudo chmod 777 ~/.ssh
 - script: sudo echo $ID_AZURE
-- script: (umask  077 ; echo $ID_AZURE | base64 -d > ~/.ssh/id_azure)
+- script: (umask  077 ; echo $ID_AZURE | base64 --decode --ignore-garbage > ~/.ssh/id_azure)
 - script: sudo ls -la ~/.ssh
 - script: sudo cat ~/.ssh/id_azure
 - script: sudo touch ~/.ssh/known_hosts
