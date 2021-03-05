@@ -24,9 +24,8 @@ steps:
 - script:  sudo chown -R vsts:root /home/vsts/.ssh/
 - script: sudo chmod 600 /home/vsts/.ssh/id_azure
 - script: sudo chmod 600 /home/vsts/.ssh/known_hosts
-- script: sudo ssh-keyscan -H -t rsa 13.84.202.197  >> /home/vsts/.ssh/known_hosts
-- script: sudo ssh -v azureuser@13.84.202.197
-- script: sudo ssh -i ~/.ssh/id_azure azureuser@13.84.202.197
+- script: ssh-keyscan -H -t rsa 13.84.202.197  >> /home/vsts/.ssh/known_hosts
+- script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197
 - script:  sbt compile
 - script:  sbt rpm:packageBin
 - script:  sudo ls -la /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/
