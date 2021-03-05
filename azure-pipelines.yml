@@ -12,15 +12,12 @@ pool:
 steps:
 - task: JavaToolInstaller@0
   inputs:
-    versionSpec: '8'
+    versionSpec: '11'
     jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'AzureStorage'
-    azureResourceManagerEndpoint: 'Azure para estudiantes(b75438fa-5691-4b49-a98f-da03e98de004)'
-    azureStorageAccountName: 'gssbuildassets'
-    azureContainerName: 'jdk'
-    azureCommonVirtualFile: 'jdk1.8.0_45.zip'
-    jdkDestinationDirectory: '$(Agent.ToolsDirectory)/jdk6'
-    cleanDestinationDirectory: true
+    jdkSourceOption: 'LocalDirectory'
+    jdkFile: '/builds/openjdk-11.0.2_linux-x64_bin.tar.gz'
+    jdkDestinationDirectory: '/builds/binaries/externals'
+    cleanDestinationDirectory: false
     
 - script: echo Compilar y correr las pruebas unitariasaa
 - script: sudo mkdir /home/vsts/.ssh
