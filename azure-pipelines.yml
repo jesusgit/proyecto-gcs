@@ -20,7 +20,7 @@ steps:
     azureContainerName: 'jdk'
     azureCommonVirtualFile: 'jdk1.8.0.zip'
     jdkDestinationDirectory: '$(Agent.ToolsDirectory)/jdk8'
-    cleanDestinationDirectory: false
+    cleanDestinationDirectory: true
     
 - script: echo Compilar y correr las pruebas unitariasaa
 - script: sudo mkdir /home/vsts/.ssh
