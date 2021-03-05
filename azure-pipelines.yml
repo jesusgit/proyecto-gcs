@@ -10,21 +10,21 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Compilar y correr las pruebas unitariasaa
-- script: sudo mkdir /home/vsts/.ssh
-- script: sudo chown vsts:root /home/vsts/.ssh
-
 - task: JavaToolInstaller@0
   inputs:
     versionSpec: '8'
     jdkArchitectureOption: 'x64'
-    jdkSourceOption: AzureStorage
-    azureResourceManagerEndpoint: gss-build-artifacts
-    azureStorageAccountName: gssbuildassets
-    azureContainerName: jdk
+    jdkSourceOption: 'AzureStorage'
+    azureResourceManagerEndpoint: 'Azure para estudiantes(b75438fa-5691-4b49-a98f-da03e98de004)'
+    azureStorageAccountName: 'gssbuildassets'
+    azureContainerName: 'jdk'
     azureCommonVirtualFile: 'jdk1.8.0.zip'
     jdkDestinationDirectory: '$(Agent.ToolsDirectory)/jdk8'
     cleanDestinationDirectory: false
+    
+- script: echo Compilar y correr las pruebas unitariasaa
+- script: sudo mkdir /home/vsts/.ssh
+- script: sudo chown vsts:root /home/vsts/.ssh
 - script: (umask  077 ; echo $ID_AZURE | base64 --decode --ignore-garbage > /home/vsts/.ssh/id_azure)
 - script: touch /home/vsts/.ssh/known_hosts
 - script: ssh-keyscan -H -t rsa 13.84.202.197  >> /home/vsts/.ssh/known_hosts
@@ -32,3 +32,4 @@ steps:
 - script: sbt rpm:packageBin
 - script: scp -i ssh -i /home/vsts/.ssh/id_azure /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@13.84.202.197:/home/azureuser
   displayName: 'Commit Check'
+
