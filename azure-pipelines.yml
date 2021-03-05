@@ -20,7 +20,6 @@ steps:
 - script: sudo cat ~/.ssh/id_azure
 - script: sudo touch ~/.ssh/known_hosts
 - script: sudo chmod 777 ~/.ssh/known_hosts
-- script: sudo  ssh-keyscan 13.84.202.197 >> ~/.ssh/known_hosts
 - script: sudo  cat ~/.ssh/known_hosts
 - script:  sudo chown vsts ~/.ssh
 - script:  sudo chown -R vsts ~/.ssh/
