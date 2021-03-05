@@ -10,15 +10,15 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- script: chmod 777 /builds
 - task: JavaToolInstaller@0
   inputs:
-    versionSpec: '8'
+    versionSpec: '11'
     jdkArchitectureOption: 'x64'
     jdkSourceOption: 'LocalDirectory'
-    jdkFile: '/opt/jdk-8u251-linux-x64.tar.gz'
-    jdkDestinationDirectory: '/opt/java'
+    jdkFile: '/builds/openjdk-11.0.2_linux-x64_bin.tar.gz'
+    jdkDestinationDirectory: '/builds/binaries/externals'
     cleanDestinationDirectory: true
-  condition: eq( variables['Agent.OS'], 'Linux' )
     
 - script: echo Compilar y correr las pruebas unitariasaa
 - script: sudo mkdir /home/vsts/.ssh
