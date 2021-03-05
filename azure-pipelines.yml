@@ -22,7 +22,9 @@ steps:
 - script:  sudo chown vsts ~/.ssh
 - script:  sudo chown -R vsts ~/.ssh/
 - script: sudo ls -la /home/vsts/.ssh/
+- script: sudo base64 --version
 - script: sudo ssh -i ~/.ssh/id_azure azureuser@13.84.202.197
+
 - script:  sbt compile
 - script:  sbt rpm:packageBin
 - script:  sudo ls -la /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/
