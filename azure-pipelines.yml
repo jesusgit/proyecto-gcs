@@ -14,13 +14,13 @@ steps:
   inputs:
     versionSpec: '8'
     jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'AzureStorage'
-    azureResourceManagerEndpoint: 'Azure para estudiantes(b75438fa-5691-4b49-a98f-da03e98de004)'
-    azureStorageAccountName: 'gssbuildassets'
-    azureContainerName: 'jdk'
-    azureCommonVirtualFile: 'jdk1.8.0.zip'
-    jdkDestinationDirectory: '$(Agent.ToolsDirectory)/jdk8'
-    cleanDestinationDirectory: true
+    jdkSourceOption: AzureStorage
+    azureResourceManagerEndpoint: gss-build-artifacts
+    azureStorageAccountName: gssbuildassets
+    azureContainerName: jdk
+    azureCommonVirtualFile: 'jdk1.8.0_45.zip'
+    jdkDestinationDirectory: '$(Agent.ToolsDirectory)/jdk6'
+    cleanDestinationDirectory: false
     
 - script: echo Compilar y correr las pruebas unitariasaa
 - script: sudo mkdir /home/vsts/.ssh
