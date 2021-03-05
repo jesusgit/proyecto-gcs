@@ -15,15 +15,14 @@ steps:
 - script: sudo chmod 777 ~/.ssh
 - script: sudo echo $ID_AZURE
 - script: (umask  077 ; echo $ID_AZURE | base64 -di > ~/.ssh/id_azure)
-- script: sudo chmod 777 ~/.ssh/id_azure
 - script: sudo ls -la ~/.ssh
 - script: sudo cat ~/.ssh/id_azure
 - script: sudo touch ~/.ssh/known_hosts
-- script: sudo chmod 777 ~/.ssh/known_hosts
 - script: sudo  cat ~/.ssh/known_hosts
 - script:  sudo chown vsts ~/.ssh
 - script:  sudo chown -R vsts ~/.ssh/
-- script: sudo ls -la /home/vsts/.ssh/id_azure
+- script: sudo ls -la /home/vsts/.ssh/
+- script:  sudo ssh-keyscan -H -t rsa 13.84.202.197  >> ~/.ssh/known_hosts
 - script:  sbt compile
 - script:  sbt rpm:packageBin
 - script:  sudo ls -la /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/
