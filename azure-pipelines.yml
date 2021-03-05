@@ -25,9 +25,8 @@ steps:
 - script: sudo chmod 600 /home/vsts/.ssh/id_azure
 - script: sudo chmod 600 /home/vsts/.ssh/known_hosts
 - script: ssh-keyscan -H -t rsa 13.84.202.197  >> /home/vsts/.ssh/known_hosts
-- script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197
 - script:  sbt compile
 - script:  sbt rpm:packageBin
 - script:  sudo ls -la /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/
-- script:  sudo scp -i ssh -i /home/vsts/.ssh/id_azure /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@13.84.202.197:/home/azureuser
+- script:  scp -i ssh -i /home/vsts/.ssh/id_azure /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@13.84.202.197:/home/azureuser
   displayName: 'Commit Check'
