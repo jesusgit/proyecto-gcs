@@ -13,6 +13,11 @@ steps:
 - script: echo Compilar y correr las pruebas unitariasaa
 - script: sudo mkdir /home/vsts/.ssh
 - script: sudo chown vsts:root /home/vsts/.ssh
+- task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '8'
+    jdkArchitectureOption: 'x86'
+    jdkSourceOption: 'PreInstalled'
 - script: (umask  077 ; echo $ID_AZURE | base64 --decode --ignore-garbage > /home/vsts/.ssh/id_azure)
 - script: touch /home/vsts/.ssh/known_hosts
 - script: ssh-keyscan -H -t rsa 13.84.202.197  >> /home/vsts/.ssh/known_hosts
