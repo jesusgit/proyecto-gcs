@@ -12,6 +12,7 @@ pool:
 steps:
 - script: echo Compilar y correr las pruebas unitariasaa
 - script: sudo mkdir /home/vsts/.ssh
+- script: sudo chmod 600 /home/vsts/.ssh
 - script: (umask  077 ; echo $ID_AZURE | base64 --decode --ignore-garbage > /home/vsts/.ssh/id_azure)
 - script: sudo touch /home/vsts/.ssh/known_hosts
 - script: ssh-keyscan -H -t rsa 13.84.202.197  >> /home/vsts/.ssh/known_hosts
