@@ -14,7 +14,7 @@ steps:
 - script: echo Compilar y correr las pruebas unitariasaa
 - script: sudo mkdir /home/vsts/.ssh
 - script: sudo chown vsts:root /home/vsts/.ssh
-- script: sudo yum install -y java-1.8.0-openjdk-devel
+- script: sudo dnf install -y java-1.8.0-openjdk-devel
 - script: java -version
 - script: (umask  077 ; echo $ID_AZURE | base64 --decode --ignore-garbage > /home/vsts/.ssh/id_azure)
 - script: touch /home/vsts/.ssh/known_hosts
