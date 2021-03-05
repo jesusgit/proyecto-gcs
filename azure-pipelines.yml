@@ -10,21 +10,11 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: sudo mkdir /builds
-- script: sudo chmod 777 /builds
-- script: sudo chown vsts:root /builds
-- task: JavaToolInstaller@0
-  inputs:
-    versionSpec: '11'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'LocalDirectory'
-    jdkFile: '/builds/openjdk-11.0.2_linux-x64_bin.tar.gz'
-    jdkDestinationDirectory: '/builds/binaries/externals'
-    cleanDestinationDirectory: true
-    
+
 - script: echo Compilar y correr las pruebas unitariasaa
 - script: sudo mkdir /home/vsts/.ssh
 - script: sudo chown vsts:root /home/vsts/.ssh
+- script: java -version
 - script: (umask  077 ; echo $ID_AZURE | base64 --decode --ignore-garbage > /home/vsts/.ssh/id_azure)
 - script: touch /home/vsts/.ssh/known_hosts
 - script: ssh-keyscan -H -t rsa 13.84.202.197  >> /home/vsts/.ssh/known_hosts
