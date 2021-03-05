@@ -10,11 +10,9 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-
 - script: echo Compilar y correr las pruebas unitariasaa
 - script: sudo mkdir /home/vsts/.ssh
 - script: sudo chown vsts:root /home/vsts/.ssh
-- script: sudo dnf install -y java-1.8.0-openjdk-devel
 - script: java -version
 - script: (umask  077 ; echo $ID_AZURE | base64 --decode --ignore-garbage > /home/vsts/.ssh/id_azure)
 - script: touch /home/vsts/.ssh/known_hosts
@@ -23,4 +21,12 @@ steps:
 - script: sbt rpm:packageBin
 - script: scp -i ssh -i /home/vsts/.ssh/id_azure /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@13.84.202.197:/home/azureuser
   displayName: 'Commit Checkh'
+- task: PowerShellOnTargetMachines@3
+  inputs:
+      Machines: 'serverweb-01'
+      UserName: 'azureuser'
+      InlineScript: |
+        # Write your powershell commands here.
+        
+        Write-Output "Hello World"
 
