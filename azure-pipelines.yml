@@ -21,7 +21,6 @@ steps:
 - script: sudo chmod 777 ~/.ssh/known_hosts
 - script: sudo  ssh-keyscan 13.84.202.197 >> ~/.ssh/known_hosts
 - script: sudo  cat ~/.ssh/known_hosts
-- script:  sudo ls -la /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/
 - script:  sbt compile
 - script:  sbt rpm:packageBin
 - script:  sudo ls -la /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/
