@@ -9,29 +9,22 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+
 steps:
-- script: echo Compilar y correr las pruebas unitariasaa
-- script: sudo mkdir /home/vsts/.ssh
-- script: sudo chown vsts:root /home/vsts/.ssh
-- script: java -version
-- script: (umask  077 ; echo $ID_AZURE | base64 --decode --ignore-garbage > /home/vsts/.ssh/id_azure)
-- script: touch /home/vsts/.ssh/known_hosts
-- script: ssh-keyscan -H -t rsa 13.84.202.197  >> /home/vsts/.ssh/known_hosts
-- script: sbt compile
-- script: sbt rpm:packageBin
-- script: scp -i ssh -i /home/vsts/.ssh/id_azure /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@13.84.202.197:/home/azureuser
-  displayName: 'Commit Checkh'
-- task: AzurePowerShell@5
-  inputs:
-      azureSubscription: 'Azure para estudiantes(b75438fa-5691-4b49-a98f-da03e98de004)'
-      ScriptType: 'InlineScript'
-      Inline: |
-        # You can write your azure powershell scripts inline here. 
-        # You can also pass predefined and custom variables to this script using arguments
-        sudo systemctl stop gcs-app
-        sudo systemctl stop nginx
-        sudo rpm -ev gcs-app-2.8.x-1.noarch
-        sudo rpm -i gcs-app-2.8.x-1.noarch.rpm
-        sudo systemctl start nginx
-        sudo systemctl status gcs-app
-      azurePowerShellVersion: 'LatestVersion'
+- script: |
+          echo Compilar y correr las pruebas unitarias
+          sudo mkdir /home/vsts/.ssh
+          sudo chown vsts:root /home/vsts/.ssh
+          (umask  077 ; echo $ID_AZURE | base64 --decode --ignore-garbage > /home/vsts/.ssh/id_azure)
+          touch /home/vsts/.ssh/known_hosts
+          ssh-keyscan -H -t rsa 13.84.202.197  >> /home/vsts/.ssh/known_hosts
+          sbt compile
+          sbt test
+  displayName: 'Commit Check Phase'
+- script: |
+          echo Correr las pruebas de integración
+  displayName: 'Integration Tests'
+- script: |
+          sbt rpm:packageBin
+          scp -i ssh -i /home/vsts/.ssh/id_azure /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@13.84.202.197:/home/azureuser
+  displayName: 'Deploy Phase'
