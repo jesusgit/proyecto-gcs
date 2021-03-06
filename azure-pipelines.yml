@@ -19,14 +19,6 @@ steps:
 - script: ssh-keyscan -H -t rsa 13.84.202.197  >> /home/vsts/.ssh/known_hosts
 - script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo systemctl stop gcs-app"
 - script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo systemctl stop nginx"
-# Chef Knife
-# Run scripts with Knife commands on your Chef workstation
-- task: ChefKnife@1
-  inputs:
-    connectedServiceName: 
-    scriptPath: 
-    #scriptArguments: # Optional
-- script:  knife ssh -i /home/vsts/.ssh/jescobar8711.pem "name:webserver-01" "sudo chef-client" -x azureuser -i /home/vsts/.ssh/id_azure  --attribute cloud.public_ipv4
 - script: sbt compile
 - script: sbt test
   displayName: 'Commit Check Phase'
@@ -36,6 +28,7 @@ steps:
 - script: scp -i ssh -i /home/vsts/.ssh/id_azure /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@13.84.202.197:/home/azureuser
 - script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo rpm -ev gcs-app-2.8.x-1.noarch"
 - script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo rpm -i gcs-app-2.8.x-1.noarch.rpm"
+- script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo chef-client"
 - script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo systemctl start gcs-app"
 - script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo systemctl start nginx"
   displayName: 'Deploy Phase'
