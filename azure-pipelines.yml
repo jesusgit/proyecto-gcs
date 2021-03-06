@@ -29,6 +29,6 @@ steps:
 - script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo rpm -ev gcs-app-2.8.x-1.noarch"
 - script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo rpm -i gcs-app-2.8.x-1.noarch.rpm"
 - script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo chef-client"
-- script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo systemctl start nginx"
 - script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo systemctl start gcs-app"
+- script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo systemctl start nginx"
   displayName: 'Deploy Phase'
