@@ -31,4 +31,5 @@ steps:
 - script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo chef-client"
 - script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo systemctl start nginx"
 - script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo systemctl start gcs-app"
+- script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo systemctl restart gcs-app"
   displayName: 'Deploy Phase'
