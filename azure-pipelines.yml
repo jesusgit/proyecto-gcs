@@ -19,8 +19,14 @@ steps:
 - script: ssh-keyscan -H -t rsa 13.84.202.197  >> /home/vsts/.ssh/known_hosts
 - script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo systemctl stop gcs-app"
 - script: ssh -i ~/.ssh/id_azure azureuser@13.84.202.197 "sudo systemctl stop nginx"
-- script: curl https://packages.chef.io/files/stable/chef-workstation/21.1.247/el/7/chef-workstation-21.1.247-1.el7.x86_64.rpm --output chef-workstation-21.1.247-1.el7.x86_64.rpm 
-- script: rpm -ivh chef-workstation-21.1.247-1.el7.x86_64.rpm
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      curl https://packages.chef.io/files/stable/chef-workstation/21.1.247/el/7/chef-workstation-21.1.247-1.el7.x86_64.rpm --output chef-workstation-21.1.247-1.el7.x86_64.rpm 
+      sudo rpm -ivh chef-workstation-21.1.247-1.el7.x86_64.rpm 
 - script:  knife ssh -i /home/vsts/.ssh/jescobar8711.pem "name:webserver-01" "sudo chef-client" -x azureuser -i /home/vsts/.ssh/id_azure  --attribute cloud.public_ipv4
 - script: sbt compile
 - script: sbt test
